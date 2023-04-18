@@ -37,17 +37,21 @@ Revenue Analyzer is a Python-based tool for analyzing revenue generated from sea
 
 	git clone https://github.com/yourusername/revenue_analyzer.git
 
+
 2. Change to the project directory:
 
 	cd revenue_analyzer
+
 
 3. Install the required packages:
 
 	pip install -r requirements.txt
 
+
 ## Configuration
 
 1. Edit the config.ini file to set the desired configuration:
+
 
 	[input]
 
@@ -68,6 +72,7 @@ Revenue Analyzer is a Python-based tool for analyzing revenue generated from sea
 	directory: The directory where output files will be saved
 
 	extension: The file extension for output files (e.g., tab, csv)
+
 
 2. Save the config.ini file.
 
