@@ -50,17 +50,23 @@ Revenue Analyzer is a Python-based tool for analyzing revenue generated from sea
 1. Edit the config.ini file to set the desired configuration:
 
 	[input]
+
 	delimiter = \t
 
 
 	[output]
+
 	directory = output
+
 	delimiter = \t
+
 	extension = tab
 
 
 	delimiter: The delimiter used in the input and output files (e.g., tab, comma)
+
 	directory: The directory where output files will be saved
+
 	extension: The file extension for output files (e.g., tab, csv)
 
 2. Save the config.ini file.
