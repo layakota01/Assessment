@@ -15,13 +15,25 @@ Revenue Analyzer is a Python-based tool for analyzing revenue generated from sea
 ## Directory structure
 
 	revenue_analyzer/
-	    ├── revenue_analyzer
-	    │   ├── __init__.py
-	    │   ├── analyzer.py
-	    │   └── utils.py
-	    ├── config.ini
-	    ├── main.py
-	    └── requirements.txt
+	│
+	├── deploy/
+	│   └── ec2_userdata.sh
+	│
+	├── revenue_analyzer/
+	│   ├── __init__.py
+	│   ├── analyzer.py
+	│   └── utils.py
+	│
+	├── tests/
+	│   ├── __init__.py
+	│   ├── test_analyzer.py
+	│   └── test_utils.py
+	│
+	├── README.md
+	├── README_tests.md
+	├── requirements.txt
+	└── setup.py
+
 
 ## Features
 
