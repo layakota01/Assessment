@@ -7,7 +7,7 @@ def main(args, config):
     analyzer = RevenueAnalyzer(args.input_file, config)
     analyzer.process_file()
 
-    output_filename = f'{datetime.now().strftime(config.get("output", "filename_format"))}'
+    output_filename = f'output/{datetime.now().strftime("%Y-%m-%d")}_SearchKeywordPerformance.tab'
     analyzer.write_output(output_filename)
 
 if __name__ == '__main__':

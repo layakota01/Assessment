@@ -72,7 +72,8 @@ class RevenueAnalyzer:
         for product in products:
             attributes = product.split(';')
             if len(attributes) >= 4:
-                revenue += float(attributes[3])
+                if attributes[3] != '':
+                    revenue += float(attributes[3])
 
         return revenue
 
