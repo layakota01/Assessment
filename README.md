@@ -33,24 +33,24 @@ Revenue Analyzer is a Python-based tool for analyzing revenue generated from sea
 
 ## Installation
 
-1. Clone the repository:
+	1. Clone the repository:
 
 	git clone https://github.com/yourusername/revenue_analyzer.git
 
 
-2. Change to the project directory:
+	2. Change to the project directory:
 
 	cd revenue_analyzer
 
 
-3. Install the required packages:
+	3. Install the required packages:
 
 	pip install -r requirements.txt
 
 
 ## Configuration
 
-1. Edit the config.ini file to set the desired configuration:
+	1. Edit the config.ini file to set the desired configuration:
 
 
 	[input]
@@ -74,20 +74,20 @@ Revenue Analyzer is a Python-based tool for analyzing revenue generated from sea
 	extension: The file extension for output files (e.g., tab, csv)
 
 
-2. Save the config.ini file.
+	2. Save the config.ini file.
 
 ## Usage
 
-Run the Revenue Analyzer:
+	Run the Revenue Analyzer:
 
 	python main.py <input_file>
 
-Replace <input_file> with the path to your input file containing hit-level data.
+	Replace <input_file> with the path to your input file containing hit-level data.
 
-The output file will be saved in the specified output directory with a name like YYYY-MM-DD_SearchKeywordPerformance.tab.
+	The output file will be saved in the specified output directory with a name like YYYY-MM-DD_SearchKeywordPerformance.tab.
 
 ## Support
 
-For any questions or issues, please contact the repository owner or open a new issue on the GitHub repository.
+	For any questions or issues, please contact the repository owner or open a new issue on the GitHub repository.
 
 ## License
