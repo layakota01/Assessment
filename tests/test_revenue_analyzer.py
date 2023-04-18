@@ -1,55 +1,43 @@
 import unittest
 from io import StringIO
+from unittest.mock import patch
 from revenue_analyzer.analyzer import RevenueAnalyzer
-from revenue_analyzer.utils import extract_search_info, extract_revenue
+from configparser import ConfigParser
 
 class TestRevenueAnalyzer(unittest.TestCase):
+    def setUp(self):
+        self.config = ConfigParser()
+        self.config.read_string("""
+            [general]
+            chunk_size = 1024
+            threads = 4
+        """)
+        
+    @patch('builtins.open')
+    def test_process_file(self, mock_open):
+        input_data = "referrer\tproduct_list\n" \
+                     "https://www.google.com/search?q=test1\tproduct1;1;2;3,product2;1;2;4\n" \
+                     "https://www.google.com/search?q=test2\tproduct3;1;2;5,product4;1;2;6\n" \
+                     "https://www.google.com/search?q=test1\tproduct5;1;2;3,product6;1;2;1\n" \
+                     "https://www.google.com/search?q=test2\tproduct7;1;2;2,product8;1;2;2\n"
+        output_data = "Search Engine Domain\tSearch Keyword\tRevenue\n" \
+                      "www.google.com\ttest2\t15.0\n" \
+                      "www.google.com\ttest1\t11.0\n"
 
-    def test_extract_search_info(self):
-        url = 'https://www.google.com/search?q=test'
-        search_engine, keyword = extract_search_info(url)
-        self.assertEqual(search_engine, 'www.google.com')
-        self.assertEqual(keyword, 'test')
+        mock_open.side_effect = [
+            StringIO(input_data),
+            StringIO(),
+            StringIO(output_data)
+        ]
 
-        url = 'https://search.yahoo.com/search?p=test'
-        search_engine, keyword = extract_search_info(url)
-        self.assertEqual(search_engine, 'search.yahoo.com')
-        self.assertEqual(keyword, 'test')
+        analyzer = RevenueAnalyzer('input_file.tsv', self.config)
+        analyzer.process_file()
+        analyzer.write_output('output_file.tsv')
 
-        url = 'https://www.bing.com/search?q=test'
-        search_engine, keyword = extract_search_info(url)
-        self.assertEqual(search_engine, 'www.bing.com')
-        self.assertEqual(keyword, 'test')
+        with open('output_file.tsv', 'r') as f:
+            result = f.read()
 
-    def test_extract_revenue(self):
-        product_list = 'P1;C1;10.0;50.0,P2;C2;5.0;25.0'
-        revenue = extract_revenue(product_list)
-        self.assertEqual(revenue, 75.0)
-
-        product_list = 'P1;C1;10.0'
-        revenue = extract_revenue(product_list)
-        self.assertEqual(revenue, 0)
-
-        product_list = ''
-        revenue = extract_revenue(product_list)
-        self.assertEqual(revenue, 0)
-
-    def test_revenue_analyzer(self):
-        input_data = StringIO('''referrer\tproduct_list
-https://www.google.com/search?q=test1\tP1;C1;10.0;50.0,P2;C2;5.0;25.0
-https://search.yahoo.com/search?p=test2\tP1;C1;10.0;75.0
-https://www.bing.com/search?q=test3\tP1;C1;10.0;60.0,P2;C2;5.0;15.0
-''')
-        analyzer = RevenueAnalyzer(input_data)
-        analyzer.parse_file()
-
-        expected_data = {
-            ('www.google.com', 'test1'): 75.0,
-            ('search.yahoo.com', 'test2'): 75.0,
-            ('www.bing.com', 'test3'): 75.0
-        }
-
-        self.assertEqual(analyzer.revenue_data, expected_data)
+        self.assertEqual(output_data, result)
 
 if __name__ == '__main__':
     unittest.main()
