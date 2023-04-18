@@ -27,7 +27,7 @@ Revenue Analyzer is a Python-based tool for analyzing revenue generated from sea
 	├── tests/
 	│   ├── __init__.py
 	│   ├── test_analyzer.py
-	│   └── test_utils.py
+	│   
 	│
 	├── README.md
 	├── README_tests.md
