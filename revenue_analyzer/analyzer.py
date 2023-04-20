@@ -60,6 +60,12 @@ class RevenueAnalyzer:
             keyword = query_params.get('q') or query_params.get('p')
             if keyword:
                 return search_engine, keyword[0]
+
+        elif search_engine == 'www.esshopzilla.com':
+            keyword = query_params.get('k')
+            if keyword:
+                return search_engine, keyword[0]
+
         return None, None
 
     @staticmethod
